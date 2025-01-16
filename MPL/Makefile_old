@@ -1,0 +1,8 @@
+
+BREW=/usr/local/Cellar
+
+test_old: test.cpp dyn_int.hpp dyn_rational.hpp
+	clang++ -O3 --std=c++20 -I ${BREW}/gmp/6.2.1_1/include/ -I ${BREW}/catch2/2.13.9/include -L ${BREW}/gmp/6.2.1_1/lib -lgmp -lgmpxx $$(pkg-config --cflags --libs cln) test.cpp -o test
+
+test_algorithms: test/algorithms.cpp algorithms.hpp
+	clang++ -O3 --std=c++20 -I ${BREW}/catch2/2.13.9/include -I ./rapidcheck/include -I ./rapidcheck/extras/catch/include test/algorithms.cpp -o test_algorithms
